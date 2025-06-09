@@ -25,6 +25,9 @@ static const char* _ENCODING_VERSION = "CAE-0.1";
 typedef uint32_t state_t;  // holds up to 15-bit CA states
 typedef uint8_t  byte;
 
+
+// ─── Rules ───────────────────────────────────────────────
+
 // A table representing a full CA lookup of size 2^L bits.
 typedef struct {
     size_t bits;   // = 1 << L
@@ -32,8 +35,7 @@ typedef struct {
     byte*  tbl;    // bit-packed lookup table
 } RuleTable;
 
-
-#define MAX_CSV_L 64
+#define MAX_CSV_L 32
 
 typedef uint32_t state_t;
 

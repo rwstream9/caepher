@@ -60,8 +60,23 @@ char* key_string(const byte* key,
 
 // ─── Demo main ─────────────────────────────────────────────────────────────
 
+
+clock_t start;
+
+void start_clock(void) {
+    start = clock();
+}
+
+void print_elapsed(const char *message) {
+    clock_t end = clock();
+    double cpu_sec = (double)(end - start) / CLOCKS_PER_SEC;
+    printf("%s time elapsed: %.6f seconds\n", message, cpu_sec);
+}
+
 int main(void) {
     load_rules_from_csv("reversible.csv");
+
+    start_clock();
 
     const char* message = "secret message";
     size_t message_len = strlen(message);
@@ -75,11 +90,13 @@ int main(void) {
         _N,
         15,
         3,
-        100,
+        10000,
         &private_key,
         &private_key_len,
         &public_key,
         &public_key_len);
+
+    print_elapsed("Generated keypair");
 
     size_t cipher_len;
     byte* cipher = encrypt(
@@ -89,6 +106,8 @@ int main(void) {
         message_len,
         &cipher_len);
 
+    print_elapsed("Encrypted message");
+
     size_t plain_len;
     byte* plain = decrypt(
         private_key,
@@ -96,6 +115,8 @@ int main(void) {
         cipher,
         cipher_len,
         &plain_len);
+
+    print_elapsed("Decrypted message");
 
     if (plain_len != message_len ||
         memcmp(plain, message, message_len) != 0)

@@ -14,6 +14,10 @@ test-python:
 	pytest
 
 
-test-caepher:
-	gcc -O3 -o caepher_test caepher_test.c
+caepher_test: caepher_test.c caepher.h
+	gcc -O3 -o $@ caepher_test.c
+
+
+# A convenience target to run your tests
+test-caepher: caepher_test
 	./caepher_test
