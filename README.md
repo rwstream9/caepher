@@ -74,5 +74,6 @@ So the total cost with the parameters I've found expedient is approximately O(M 
 
 In order to achieve 128-bit security, at L=15, we need M approx 48, which takes a very short period to generate keys, encode and decode data in the C application.
 
-This all assumes that there is no shortcut to extract the 
+This all assumes that there is no shortcut to extract the N=5 rules somehow from the public key, or that the public key
+could not be used to efficiently construct a reverse mapping.
 
