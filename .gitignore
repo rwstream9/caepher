@@ -1,0 +1,7 @@
+.DS_Store
+.idea
+__pycache__
+notes.ipynb
+reversible-bak.csv
+/reverse
+/caepher_test
